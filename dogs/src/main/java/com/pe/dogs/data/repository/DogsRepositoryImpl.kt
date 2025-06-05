@@ -18,41 +18,6 @@ class DogsRepositoryImpl @Inject constructor(
     private val dao: DogDao
 ) : DogsRepository {
 
-    /*override suspend fun getDogs(): List<DogModel> {
-        val cachedDogs = dao.getAllDogs()
-        return if (cachedDogs.isNotEmpty()) {
-            cachedDogs.map { it.toDomain() }
-        } else {
-            when (val result = safeApiCall { api.getDogs() }) {
-                is NetworkResult.Success -> {
-                    val dogs = result.data.map { it.toDomain() }
-                    val entities = dogs.map { it.toEntity() }
-                    entities.forEach {
-                        AppLogger.v("DogEntity", "id: ${it.id}, name: ${it.dogName}")
-                    }
-
-                    dao.insertAll(dogs.map { it.toEntity() })
-                    dogs
-                }
-
-                is NetworkResult.Error -> {
-                    // Log error o manejar según tu necesidad
-                    throw Exception("Error de red: ${result.message}")
-                }
-
-                is NetworkResult.Timeout -> {
-                    throw Exception("Tiempo de espera agotado. Inténtalo de nuevo.")
-                }
-
-                is NetworkResult.NetworkError -> {
-                    throw Exception("Error de conexión. Verifica tu conexión a Internet.")
-                }
-
-                is NetworkResult.Loading -> emptyList() // Rara vez se use aquí
-            }
-        }
-    }*/
-
     override suspend fun getDogs(): NetworkResult<List<DogModel>> {
         val cachedDogs = dao.getAllDogs()
 

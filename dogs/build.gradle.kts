@@ -48,6 +48,14 @@ android {
     }
 }
 
+kotlin {
+    sourceSets {
+        getByName("test") {
+            kotlin.srcDirs("src/test/kotlin")
+        }
+    }
+}
+
 dependencies {
 
     implementation(project(":core-network"))
@@ -69,14 +77,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //Test
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
-
 
     // Retrofit + Moshi
     implementation(libs.retrofit)

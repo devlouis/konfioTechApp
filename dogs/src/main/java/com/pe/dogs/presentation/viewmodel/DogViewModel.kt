@@ -23,46 +23,21 @@ class DogViewModel @Inject constructor(
 ): ViewModel() {
     val TAG = "DogViewModel"
 
+    // Flag solo visible para testing
+    var testMode: Boolean = false
+
     private val _dogState = MutableStateFlow<UiState<List<DogModel>>>(UiState.Idle)
     val dogState: StateFlow<UiState<List<DogModel>>> = _dogState
-
-    init {
-        getDogsList()
-    }
-
-    /*fun getDogsList(){
-        viewModelScope.launch {
-            _dogState.value = DogState.Loading
-            try {
-                val dogs = dogsUseCase.getDogsList()
-                if (dogs.isNotEmpty()){
-                    AppLogger.v(tag = TAG, "$dogs")
-                    _dogState.value = DogState.Success(dogs)
-                } else {
-                    AppLogger.v(tag = TAG, "Error")
-                    _dogState.value = DogState.Error("Error")
-                }
-            } catch (e: Exception) {
-                AppLogger.v(tag = TAG,"Exception Error: ${e.message}")
-                _dogState.value = DogState.Error("Exception Error: ${e.message}")
-            }
-        }
-    }*/
 
     fun getDogsList() {
         viewModelScope.launch {
             _dogState.value = UiState.Loading
-            when (val result = dogsUseCase.getDogsList()) {
-                is NetworkResult.Success -> {
-                    _dogState.value = UiState.Success(result.data)
-                    AppLogger.v(tag = TAG, "${result.data}")
-                }
-                is NetworkResult.Timeout -> _dogState.value = UiState.Error("Tiempo de espera agotado.")
-                is NetworkResult.NetworkError -> _dogState.value = UiState.Error("Sin conexión a internet.")
-                is NetworkResult.Error -> _dogState.value = UiState.Error(result.message)
-                else -> _dogState.value = UiState.Error("Error desconocido.")
-            }
+            if (testMode) kotlinx.coroutines.yield()
+            val result = dogsUseCase.getDogsList()
+            _dogState.value = result.fold(
+                onSuccess = { UiState.Success(it) },
+                onFailure = { UiState.Error(it.message ?: "Error desconocido") }
+            )
         }
     }
-
 }

@@ -48,6 +48,14 @@ android {
     }
 }
 
+kotlin {
+    sourceSets {
+        getByName("test") {
+            kotlin.srcDirs("src/test/kotlin")
+        }
+    }
+}
+
 dependencies {
 
     implementation(project(":core-network"))
@@ -69,6 +77,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //Test
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
@@ -76,7 +88,6 @@ dependencies {
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
-
 
     // Retrofit + Moshi
     implementation(libs.retrofit)

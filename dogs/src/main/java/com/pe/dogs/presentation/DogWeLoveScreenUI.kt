@@ -12,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.pe.dogs.presentation.state.DogState
 import com.pe.dogs.presentation.state.UiState
 import com.pe.dogs.presentation.viewmodel.DogViewModel
 

@@ -2,15 +2,9 @@ package com.pe.dogs.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pe.corenetwork.NetworkResult
-
-import com.pe.corenetwork.model.DogDto
-import com.pe.dogs.domain.Resource
 import com.pe.dogs.domain.model.DogModel
 import com.pe.dogs.domain.usecase.DogsUseCase
-import com.pe.dogs.presentation.state.DogState
 import com.pe.dogs.presentation.state.UiState
-import com.pe.utilities.logging.AppLogger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

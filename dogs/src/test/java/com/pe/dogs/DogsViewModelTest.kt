@@ -30,8 +30,6 @@ class DogViewModelTest {
     @MockK
     lateinit var useCase: DogsUseCase
 
-    private lateinit var viewModel: DogViewModel
-
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)

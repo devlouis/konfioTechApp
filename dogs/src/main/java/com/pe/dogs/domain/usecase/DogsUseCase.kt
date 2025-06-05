@@ -1,11 +1,8 @@
 package com.pe.dogs.domain.usecase
 
 import com.pe.corenetwork.NetworkResult
-import com.pe.dogs.domain.Resource
 import com.pe.dogs.domain.model.DogModel
 import com.pe.dogs.domain.repository.DogsRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class DogsUseCase @Inject constructor(

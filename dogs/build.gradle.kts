@@ -76,4 +76,11 @@ dependencies {
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+
+
+    // Retrofit + Moshi
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi)
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 }

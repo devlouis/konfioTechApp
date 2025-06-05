@@ -1,7 +1,8 @@
 package com.pe.dogs.domain.repository
 
+import com.pe.corenetwork.NetworkResult
 import com.pe.dogs.domain.model.DogModel
 
 interface DogsRepository {
-    suspend fun getDogs():  List<DogModel>
+    suspend fun getDogs(): NetworkResult<List<DogModel>>
 }

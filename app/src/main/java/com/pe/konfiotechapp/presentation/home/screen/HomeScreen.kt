@@ -1,32 +1,62 @@
 package com.pe.konfiotechapp.presentation.home.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.pe.coredesign.components.AppToolbar
 import com.pe.coredesign.theme.AppColors
 import com.pe.konfiotechapp.R
 import com.pe.coredesign.components.BannerComponent
+import com.pe.coredesign.components.SnackBar.SnackbarHostSuccessCustom
+import com.pe.dogs.presentation.state.UiState
+import com.pe.dogs.presentation.viewmodel.DogViewModel
+import com.pe.utilities.logging.AppLogger
+import kotlinx.coroutines.launch
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun HomeScreen(
+    viewModel: DogViewModel = hiltViewModel(),
     primaryButtonClicked: () -> Unit = {},
     dogBannerOnClick: () -> Unit = {}
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
+
+    LaunchedEffect(Unit) {
+        viewModel.dogBDEvent.collect { message ->
+            snackbarHostState.showSnackbar(message)
+        }
+    }
     Scaffold(
         topBar = {
             AppToolbar(title = stringResource(R.string.home),
+                isSyncVisible = true,
                 primaryButtonClicked = {
                     primaryButtonClicked()
+                },
+                syncClicked = {
+                        viewModel.clearDogs()
+
                 })
+        },
+        snackbarHost = {
+            SnackbarHostSuccessCustom(snackbarHostState = snackbarHostState)
         }
     ) { innerPadding ->
         Column(
@@ -38,7 +68,7 @@ fun HomeScreen(
         ) {
             BannerComponent(
                 title = stringResource(R.string.dogs_we_love),
-                description = stringResource(R.string.ver_mas),
+                description = stringResource(R.string.click_here),
                 resourceValue = R.drawable.we_love_dogs,
                 bannerOnClick = {
                     dogBannerOnClick()

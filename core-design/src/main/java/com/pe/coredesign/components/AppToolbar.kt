@@ -2,11 +2,9 @@ package com.pe.coredesign.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -22,8 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pe.coredesign.R
-import com.pe.coredesign.theme.AppColors
-import com.pe.coredesign.theme.AppColors.Background
 import com.pe.coredesign.theme.AppColors.Primary
 import com.pe.coredesign.theme.AppColors.WhiteColor
 
@@ -31,7 +27,9 @@ import com.pe.coredesign.theme.AppColors.WhiteColor
 fun AppToolbar(
     title: String? = null,
     isBackButtonVisible: Boolean = false,
-    primaryButtonClicked: () -> Unit = {}
+    isSyncVisible: Boolean = false,
+    primaryButtonClicked: () -> Unit = {},
+    syncClicked: () -> Unit = {}
 ) {
     Row(modifier = Modifier
         .background(Primary)
@@ -62,7 +60,19 @@ fun AppToolbar(
                 textColorValue = WhiteColor
             )
         }
-
+        Spacer(modifier = Modifier.weight(1f))
+        if (isSyncVisible) {
+            Icon(
+                modifier = Modifier
+                    .size(28.dp)
+                    .clickable {
+                        syncClicked()
+                    },
+                painter = (painterResource(id = R.drawable.ic_sync)),
+                contentDescription = "Sync",
+                tint = WhiteColor
+            )
+        }
     }
 }
 

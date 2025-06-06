@@ -6,10 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pe.coredesign.components.AppToolbar
+import com.pe.coredesign.components.SnackBar.SnackbarHostSuccessCustom
 import com.pe.coredesign.components.TextComponent
 import com.pe.coredesign.components.ViewLoading
 import com.pe.dogs.R
@@ -27,8 +29,6 @@ import com.pe.dogs.presentation.viewmodel.DogViewModel
 fun DogWeLoveScreenUI(
     viewModel: DogViewModel = hiltViewModel(),
     primaryButtonClicked: () -> Unit = {}) {
-
-    viewModel.getDogsList()
     Scaffold (
         topBar = {
             AppToolbar(
@@ -45,6 +45,9 @@ fun DogWeLoveScreenUI(
                 .padding(0.dp),
             verticalArrangement = Arrangement.Center
         ) {
+            LaunchedEffect(Unit) { //
+                viewModel.getDogsList()
+            }
             when (val state = viewModel.dogState.collectAsState().value) {
                 is UiState.Idle -> { }
                 is UiState.Loading -> { ViewLoading() }

@@ -88,7 +88,9 @@ fun BannerComponent (
                 TextComponent(
                     modifier = Modifier
                         .wrapContentSize(),
-                    textValue = it
+                    textValue = it,
+                    fontSizeValue = 14.sp,
+                    textColorValue = AppColors.WhiteColor
                 )
             }
         }

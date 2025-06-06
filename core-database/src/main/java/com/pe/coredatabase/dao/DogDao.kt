@@ -13,4 +13,7 @@ interface DogDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(dogs: List<DogEntity>)
+
+    @Query("DELETE FROM dogs")
+    suspend fun clearAll()
 }

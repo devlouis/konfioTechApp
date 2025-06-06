@@ -41,4 +41,13 @@ class DogsRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun clearForSync(): Result<Unit> {
+        return try {
+            dao.clearAll()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

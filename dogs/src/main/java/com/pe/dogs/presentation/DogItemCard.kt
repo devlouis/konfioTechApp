@@ -35,7 +35,7 @@ import com.pe.dogs.domain.model.DogModel
 fun DogItemCard(dog: DogModel) {
     Card (
         modifier = Modifier
-            .padding(bottom = 16.dp)
+            .padding(16.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         shape = RoundedCornerShape(12.dp),

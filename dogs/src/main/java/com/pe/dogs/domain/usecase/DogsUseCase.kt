@@ -17,4 +17,13 @@ class DogsUseCase @Inject constructor(
             else -> Result.failure(Exception("Error desconocido."))
         }
     }
+
+    suspend fun clearLocalDogs(): Result<Unit> {
+        return try {
+            repository.clearForSync()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

@@ -2,5 +2,6 @@
     <string name="app_name">konfioTechApp</string>
     <string name="dogs_we_love">Dogs We Love</string>
     <string name="ver_mas">Ver mas ...</string>
+    <string name="click_here">Click Aquí</string>
     <string name="home">Home</string>
 </resources>

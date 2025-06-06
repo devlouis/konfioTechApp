@@ -45,6 +45,7 @@ dependencies {
 
     implementation(project(":dogs"))
     implementation(project(":core-design"))
+    implementation(project(":utilities"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

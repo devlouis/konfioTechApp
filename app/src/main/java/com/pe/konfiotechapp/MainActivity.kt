@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.pe.coredesign.theme.AppTheme
 import com.pe.dogs.presentation.DogWeLoveScreenUI
+import com.pe.konfiotechapp.presentation.nav.AppNavGraph
 import com.pe.konfiotechapp.ui.theme.KonfioTechAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,11 +23,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            KonfioTechAppTheme {
+        /*setContent {
+            AppTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                    DogWeLoveScreenUI()
                 }
+            }
+        }*/
+        setContent{
+            AppTheme {
+                AppNavGraph()
             }
         }
     }

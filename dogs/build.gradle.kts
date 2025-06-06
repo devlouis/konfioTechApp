@@ -60,6 +60,7 @@ dependencies {
 
     implementation(project(":core-network"))
     implementation(project(":core-database"))
+    implementation(project(":core-design"))
     implementation(project(":utilities"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

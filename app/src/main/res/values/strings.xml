@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">konfioTechApp</string>
+    <string name="dogs_we_love">Dogs We Love</string>
+    <string name="ver_mas">Ver mas ...</string>
 </resources>

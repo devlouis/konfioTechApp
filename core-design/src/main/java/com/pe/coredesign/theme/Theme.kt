@@ -10,7 +10,7 @@ fun AppTheme(content: @Composable () -> Unit) {
         colorScheme = lightColorScheme(
             primary = AppColors.Primary,
             secondary = AppColors.Secondary,
-            background = AppColors.Background,
+            background = AppColors.WhiteColor,
             error = AppColors.Error
         ),
         typography = AppTypography,

@@ -60,6 +60,7 @@ dependencies {
 
     implementation(project(":core-network"))
     implementation(project(":core-database"))
+    implementation(project(":core-design"))
     implementation(project(":utilities"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -94,4 +95,8 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.moshi)
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
+
+    //Coil
+    implementation(libs.coil)
+    implementation(libs.coilNetwork)
 }

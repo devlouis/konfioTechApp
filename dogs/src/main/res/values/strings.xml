@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dogs_we_love">Dogs We Love</string>
+    <string name="unknown_error">Error desconocido</string>
+    <string name="dogs_list_clear">"Se limpió la lista Dogs"</string>
+    <string name="dogs_list_clear_error">"Error al limpiar la lista Dogs"</string>
+</resources>

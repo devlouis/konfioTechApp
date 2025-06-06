@@ -95,4 +95,8 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.moshi)
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
+
+    //Coil
+    implementation(libs.coil)
+    implementation(libs.coilNetwork)
 }

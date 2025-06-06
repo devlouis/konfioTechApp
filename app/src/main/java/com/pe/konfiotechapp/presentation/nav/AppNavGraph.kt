@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.pe.dogs.presentation.DogWeLoveScreenUI
 import com.pe.konfiotechapp.presentation.Screen
 import com.pe.konfiotechapp.presentation.home.screen.HomeScreen
 
@@ -24,7 +25,21 @@ fun AppNavGraph () {
             startDestination = Screen.HomeScreen.route
         ) {
             composable(route = Screen.HomeScreen.route) {
-                HomeScreen()
+                HomeScreen(
+                    primaryButtonClicked = {
+
+                    },
+                    dogBannerOnClick = {
+                        navController.navigate(Screen.DogsScreen.route)
+                    }
+                )
+            }
+            composable(route = Screen.DogsScreen.route) {
+                DogWeLoveScreenUI(
+                    primaryButtonClicked = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }

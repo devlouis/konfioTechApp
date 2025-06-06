@@ -14,13 +14,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.pe.coredesign.components.AppToolbar
 import com.pe.coredesign.theme.AppColors
 import com.pe.konfiotechapp.R
-import com.pe.konfiotechapp.presentation.home.componentes.BannerComponent
+import com.pe.coredesign.components.BannerComponent
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    primaryButtonClicked: () -> Unit = {},
+    dogBannerOnClick: () -> Unit = {}
+) {
     Scaffold(
         topBar = {
-            AppToolbar()
+            AppToolbar(title = stringResource(R.string.home),
+                primaryButtonClicked = {
+                    primaryButtonClicked()
+                })
         }
     ) { innerPadding ->
         Column(
@@ -33,7 +39,10 @@ fun HomeScreen() {
             BannerComponent(
                 title = stringResource(R.string.dogs_we_love),
                 description = stringResource(R.string.ver_mas),
-                resourceValue = R.drawable.we_love_dogs
+                resourceValue = R.drawable.we_love_dogs,
+                bannerOnClick = {
+                    dogBannerOnClick()
+                }
                 /*imageUrl = "https://static.wixstatic.com/media/b7bd22_334301ac02ab4c62b68e4729e635b18f~mv2.webp/v1/fill/w_340,h_158,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/We%20Love%20Dogs%20Logo.webp"*/
             )
         }

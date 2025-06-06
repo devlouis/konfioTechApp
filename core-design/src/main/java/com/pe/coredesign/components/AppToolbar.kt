@@ -1,6 +1,7 @@
 package com.pe.coredesign.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,12 +22,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pe.coredesign.R
+import com.pe.coredesign.theme.AppColors
 import com.pe.coredesign.theme.AppColors.Background
 import com.pe.coredesign.theme.AppColors.Primary
 import com.pe.coredesign.theme.AppColors.WhiteColor
 
 @Composable
-fun AppToolbar() {
+fun AppToolbar(
+    title: String? = null,
+    isBackButtonVisible: Boolean = false,
+    primaryButtonClicked: () -> Unit = {}
+) {
     Row(modifier = Modifier
         .background(Primary)
         .systemBarsPadding()
@@ -37,18 +43,25 @@ fun AppToolbar() {
         verticalAlignment = Alignment.CenterVertically
         ) {
         Icon(
-            modifier = Modifier.size(28.dp),
-            painter = painterResource(id = R.drawable.ic_pets),
-            contentDescription = "User image",
+            modifier = Modifier
+                .size(28.dp)
+                .clickable {
+                    primaryButtonClicked()
+                },
+            painter = painterResource(id = if (isBackButtonVisible) R.drawable.ic_arrow_back else R.drawable.ic_pets),
+            contentDescription = if (isBackButtonVisible) "back button" else "User image",
             tint = WhiteColor
 
         )
         Spacer(modifier = Modifier.width(16.dp))
-        TextComponent(
-            modifier = Modifier.wrapContentSize(),
-            textValue = "Home",
-            fontSizeValue = 20.sp
-        )
+        title?.let {
+            TextComponent(
+                modifier = Modifier.wrapContentSize(),
+                textValue = it,
+                fontSizeValue = 20.sp,
+                textColorValue = WhiteColor
+            )
+        }
 
     }
 }

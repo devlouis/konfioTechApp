@@ -54,4 +54,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Coil
+    implementation(libs.coil)
+    implementation(libs.coilNetwork)
 }

@@ -21,7 +21,7 @@ fun ViewLoading() {
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f))
+            .background(Color.Black.copy(alpha = 0.3f))
             .zIndex(10f)
     ) {
         Surface(
@@ -32,8 +32,7 @@ fun ViewLoading() {
             Box(contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(80.dp)
-                        .padding(16.dp),
+                        .size(80.dp),
                     color = Color(0xFF666666)
                 )
                 // CircularProgressIndicator()

@@ -11,43 +11,66 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pe.coredesign.components.AppToolbar
 import com.pe.coredesign.components.TextComponent
 import com.pe.coredesign.components.ViewLoading
+import com.pe.dogs.R
 import com.pe.dogs.presentation.state.UiState
 import com.pe.dogs.presentation.viewmodel.DogViewModel
 
 @Composable
-fun DogWeLoveScreenUI(viewModel: DogViewModel = hiltViewModel()) {
-    val dogState by viewModel.dogState.collectAsState()
+fun DogWeLoveScreenUI(
+    viewModel: DogViewModel = hiltViewModel(),
+    primaryButtonClicked: () -> Unit = {}) {
 
     viewModel.getDogsList()
-    Scaffold { padding ->
+    Scaffold (
+        topBar = {
+            AppToolbar(
+                title = stringResource(R.string.dogs_we_love),
+                isBackButtonVisible = true,
+                primaryButtonClicked = {
+                    primaryButtonClicked()
+                })
+        }
+    ){ padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
+                .padding(0.dp),
             verticalArrangement = Arrangement.Center
         ) {
             when (val state = viewModel.dogState.collectAsState().value) {
-                is UiState.Idle -> { /* Mostrar pantalla vacía o inicial */ }
+                is UiState.Idle -> { }
                 is UiState.Loading -> { ViewLoading() }
                 is UiState.Success -> {
                     val dogs = state.data
-                    TextComponent(
-                        modifier = Modifier.wrapContentSize(),
-                        textValue = dogs.toString(),
-                        fontSizeValue = 16.sp
-                    )
+                    DogListScreen(
+                        padding = padding,
+                        dogs = dogs)
                 }
                 is UiState.Error -> {
-                    Text("Error: ${state.message}")
+                    TextComponent(
+                        modifier = Modifier.wrapContentSize(),
+                        textValue = "Error: ${state.message}",
+                        fontSizeValue = 16.sp
+                    )
                 }
             }
         }
     }
+}
 
+@Preview(
+    showBackground = true,
+    apiLevel = 34
+)
+@Composable
+fun DogWeLoveScreenUIPreview() {
+    DogWeLoveScreenUI()
 }

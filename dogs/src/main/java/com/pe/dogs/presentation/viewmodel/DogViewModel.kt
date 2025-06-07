@@ -1,5 +1,7 @@
 package com.pe.dogs.presentation.viewmodel
 
+import android.content.Context
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pe.dogs.R
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DogViewModel @Inject constructor(
-    private val dogsUseCase: DogsUseCase
+    private val dogsUseCase: DogsUseCase,
+    private val context: Context
 ): ViewModel() {
     val TAG = "DogViewModel"
 
@@ -39,7 +42,7 @@ class DogViewModel @Inject constructor(
             val result = dogsUseCase.getDogsList()
             _dogState.value = result.fold(
                 onSuccess = { UiState.Success(it) },
-                onFailure = { UiState.Error(it.message ?: R.string.unknown_error.toString()) }
+                onFailure = { UiState.Error(it.message ?: context.getString(R.string.unknown_error)) }
             )
         }
     }
@@ -49,9 +52,9 @@ class DogViewModel @Inject constructor(
             _dogBDState.value = UiState.Loading
             try {
                 dogsUseCase.clearLocalDogs()
-                _dogBDEvent.emit(R.string.dogs_list_clear.toString())
+                _dogBDEvent.emit(context.getString(R.string.dogs_list_clear))
             } catch (e: Exception) {
-                _dogBDEvent.emit(R.string.dogs_list_clear_error.toString())
+                _dogBDEvent.emit(context.getString(R.string.dogs_list_clear_error))
             }
 
         }

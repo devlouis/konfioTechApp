@@ -2,14 +2,14 @@ package com.pe.dogs.di
 
 import android.app.Application
 import android.content.Context
-import com.pe.corenetwork.DogsApi
+import com.pe.coredatabase.dao.DogDao
+import com.pe.corenetwork.DogsApiService
 import com.pe.dogs.data.repository.DogsRepositoryImpl
 import com.pe.dogs.domain.repository.DogsRepository
 import com.pe.dogs.domain.usecase.DogsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -22,9 +22,9 @@ object DogModule {
     @Provides
     @Singleton
     fun provideDogRepository(
-        api: DogsApi
-     /*   dao: DogDao*/
-    ): DogsRepository = DogsRepositoryImpl(api)
+        api: DogsApiService,
+        dao: DogDao
+    ): DogsRepository = DogsRepositoryImpl(api, dao)
 
     @Provides
     fun provideDogsUseCase(

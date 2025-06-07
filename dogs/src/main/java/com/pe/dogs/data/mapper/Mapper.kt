@@ -3,6 +3,7 @@ package com.pe.dogs.data.mapper
 import com.pe.coredatabase.entity.DogEntity
 import com.pe.corenetwork.model.DogDto
 import com.pe.dogs.domain.model.DogModel
+import java.util.UUID
 
 // DogDto -> Domain
 fun DogDto.toDomain(): DogModel {
@@ -28,7 +29,7 @@ fun DogEntity.toDomain(): DogModel {
 // Domain -> DogEntity (para guardar en BD)
 fun DogModel.toEntity(): DogEntity {
     return DogEntity(
-        id = id ?: "",
+        id = id ?: UUID.randomUUID().toString(),
         dogName = dogName ?: "",
         description = description ?: "",
         age = age ?: 0,
